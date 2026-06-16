@@ -766,6 +766,111 @@ Métodos: AllowAnyMethod
 
 ---
 
+---
+
+# Decisiones de Diseño Implementadas
+
+## Obtención de precios en tiempo real
+
+El sistema no almacena cotizaciones históricas de criptomonedas en la base de datos. En su lugar, consulta la API pública de CriptoYa cada vez que se registra una operación o se calcula el estado del portfolio.
+
+### Ventajas
+
+- Información actualizada en tiempo real.
+- No requiere mantener una tabla de cotizaciones.
+- Reduce el volumen de datos almacenados.
+
+### Desventajas
+
+- Dependencia de un servicio externo.
+- Posibles demoras si la API no responde.
+
+---
+
+## Cálculo del Portfolio
+
+El portfolio se calcula dinámicamente a partir del historial de transacciones registradas por el usuario.
+
+Para cada criptomoneda:
+
+1. Se obtienen todas las compras y ventas.
+2. Se calcula el saldo actual.
+3. Se consulta el precio actual mediante CriptoYa.
+4. Se calcula la valuación total en ARS.
+5. Se determina ganancia o pérdida respecto al costo de adquisición.
+
+Este enfoque evita inconsistencias entre los movimientos registrados y el estado actual del portfolio.
+
+---
+
+## Autenticación y Seguridad
+
+La autenticación se implementa mediante JSON Web Tokens (JWT).
+
+Flujo:
+
+1. El usuario se registra o inicia sesión.
+2. El backend valida las credenciales.
+3. Se genera un token JWT firmado.
+4. El frontend almacena el token.
+5. Cada petición protegida envía el token en el encabezado Authorization.
+
+Los endpoints sensibles requieren autenticación previa.
+
+---
+
+## Arquitectura por Capas
+
+El backend sigue una arquitectura en capas:
+
+### Controllers
+
+Exponen los endpoints HTTP y reciben solicitudes.
+
+### Services
+
+Implementan la lógica de negocio.
+
+### Repositories
+
+Gestionan el acceso a datos mediante Dapper.
+
+### Base de Datos
+
+Persistencia en SQL Server.
+
+La separación de responsabilidades facilita el mantenimiento y la escalabilidad del sistema.
+
+---
+
+## Persistencia de Datos
+
+La aplicación utiliza SQL Server como motor de base de datos.
+
+Las principales entidades son:
+
+- Usuarios
+- Criptomonedas
+- Transacciones
+- Métodos de Pago
+
+Las consultas se realizan mediante Dapper utilizando SQL parametrizado para minimizar riesgos de inyección SQL.
+
+---
+
+## Escalabilidad Futura
+
+El diseño actual permite incorporar futuras funcionalidades como:
+
+- Soporte para múltiples exchanges.
+- Importación automática de operaciones.
+- Notificaciones de variación de precios.
+- Exportación de reportes PDF y Excel.
+- Dashboard avanzado con métricas históricas.
+- Integración con APIs de Binance, Lemon y Buenbit.
+
+---
+
 ## Mejoras Recomendadas
 
 ### 🔴 Alta Prioridad
