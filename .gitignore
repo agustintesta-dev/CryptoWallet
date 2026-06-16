@@ -1,0 +1,21 @@
+# Visual Studio
+.vs/
+.vscode/
+
+# ASP.NET
+bin/
+obj/
+
+# Vue
+node_modules/
+dist/
+
+# Archivos de usuario
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Variables de entorno
+.env
