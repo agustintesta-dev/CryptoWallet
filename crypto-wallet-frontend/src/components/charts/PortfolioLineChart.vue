@@ -34,10 +34,10 @@
         instanciaChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: props.datos.map(d => d.fecha),
+                labels: props.datos.map(d => d.Fecha),
                 datasets: [{
                     label: 'Capital invertido (ARS)',
-                    data: props.datos.map(d => d.valorARS),
+                    data: props.datos.map(d => d.ValorARS),
                     borderColor: '#6c63ff',
                     backgroundColor: gradient,
                     borderWidth: 2,
