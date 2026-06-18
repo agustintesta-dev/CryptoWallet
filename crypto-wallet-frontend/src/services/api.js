@@ -55,7 +55,7 @@ export const transaccionesApi = {
 
 export const portfolioApi = {
     obtener: () => api.get('/portfolio', { timeout: 20000 }),
-    obtenerHistorial: () => api.get('portfolio/historial')
+    obtenerHistorial: () => api.get('/portfolio/historial')
 }
 
 export const criptosApi = {

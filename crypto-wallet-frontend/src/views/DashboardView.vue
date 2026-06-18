@@ -64,7 +64,7 @@
             </div>
 
             <div v-if="historialPortfolio.length > 1" class="card" style="margin-bottom: 1.5rem;">
-                <h3 class="seccion-titulo" style="margin-bottom: 1rem;">Evolución del portfolio</h3>
+                <h3 class="seccion-titulo" style="margin-bottom: 1rem;">Capital invertido acumulado</h3>
                 <PortfolioLineChart :datos="historialPortfolio" />
             </div>
         

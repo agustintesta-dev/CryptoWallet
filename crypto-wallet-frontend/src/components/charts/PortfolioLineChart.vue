@@ -20,8 +20,11 @@
     let instanciaChart = null
     
     const crearChart = () => {
+        if(instanciaChart) {
+            instanciaChart.destroy()
+            instanciaChart = null
+        } 
         if(!canvasRef.value || !props.datos.length) return
-        if(instanciaChart) instanciaChart.destroy()
 
         const ctx = canvasRef.value.getContext('2d')
         const gradient = ctx.createLinearGradient(0, 0, 0, 300)
@@ -33,7 +36,7 @@
             data: {
                 labels: props.datos.map(d => d.fecha),
                 datasets: [{
-                    label: 'Valor del portfolio (ARS)',
+                    label: 'Capital invertido (ARS)',
                     data: props.datos.map(d => d.valorARS),
                     borderColor: '#6c63ff',
                     backgroundColor: gradient,
