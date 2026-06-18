@@ -310,7 +310,11 @@ namespace CryptoWallet.API.Repositories
                 });
             }
 
-            return puntos;
+            return puntos
+                .GroupBy(p => p.Fecha)
+                .Select(g => g.Last())
+                .OrderBy(p => p.Fecha)
+                .ToList();
         }   
     }
 }
